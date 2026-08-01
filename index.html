@@ -134,7 +134,6 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
         </div>
       </div>
     </div>
-    <button onclick="testarConexao()" style="width:100%;padding:10px;background:#fff;color:var(--sage-dark);border:1px solid var(--sage);border-radius:8px;font-size:13px;cursor:pointer;margin-bottom:8px;">🔌 Testar conexão com a API</button>
     <button id="btn-gerar" class="btn-gerar" onclick="gerarDevolutiva()" disabled>✨ Gerar devolutiva completa</button>
     <div id="progress-box" class="progress-box">
       <div class="progress-bar-bg"><div id="progress-fill" class="progress-bar-fill"></div></div>
@@ -181,59 +180,61 @@ let textoNarrativo='';
 
 function salvarChave(){
   const k=document.getElementById('api-key-input').value.trim();
-  if(!k.startsWith('sk-ant-')){document.getElementById('config-erro').textContent='Chave inválida.';document.getElementById('config-erro').style.display='block';return;}
-  apiKey=k;localStorage.setItem('disc_key',k);
+  if(!k.startsWith('sk-ant-')){
+    document.getElementById('config-erro').textContent='Chave inválida. Deve começar com sk-ant-';
+    document.getElementById('config-erro').style.display='block';
+    return;
+  }
+  apiKey=k;
+  localStorage.setItem('disc_key',k);
   document.getElementById('tela-config').style.display='none';
   document.getElementById('tela-app').style.display='block';
 }
+
 function trocarChave(){
   document.getElementById('tela-config').style.display='flex';
   document.getElementById('tela-app').style.display='none';
   document.getElementById('tela-resultado').style.display='none';
 }
+
 window.onload=function(){
   const s=localStorage.getItem('disc_key');
-  if(s&&s.startsWith('sk-ant-')){apiKey=s;document.getElementById('tela-config').style.display='none';document.getElementById('tela-app').style.display='block';}
+  if(s&&s.startsWith('sk-ant-')){
+    apiKey=s;
+    document.getElementById('tela-config').style.display='none';
+    document.getElementById('tela-app').style.display='block';
+  }
 };
+
 function handleSlot(tipo,input){
-  const f=input.files[0];if(!f)return;
+  const f=input.files[0];
+  if(!f)return;
   arquivos[tipo]=f;
   document.getElementById('slot-'+tipo).classList.add('loaded');
   document.getElementById('status-'+tipo).textContent=f.name.length>30?f.name.substring(0,28)+'…':f.name;
   verificarPronto();
 }
+
 function verificarPronto(){
-}
-async function testarConexao(){
-  const eb=document.getElementById("erro-box");
-  eb.style.display="none";
-  try{
-    const resp=await fetch("/api",{method:"POST",headers:{"Content-Type":"application/json","x-api-key":apiKey},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:50,messages:[{role:"user",content:"Diga apenas: Conexão OK!"}]})});
-    const txt=await resp.text();
-    console.log("Resposta bruta:", txt.substring(0,200));
-    try{
-      const data=JSON.parse(txt);
-      if(data.content)alert("✅ Conexão funcionando! API respondeu corretamente.");
-      else alert("⚠️ Resposta inesperada: "+JSON.stringify(data).substring(0,200));
-    }catch(e){
-      alert("❌ Resposta não é JSON:\n"+txt.substring(0,300));
-    }
-  }catch(e){
-    alert("❌ Erro de rede: "+e.message);
-  }
-function _verificarPronto(){
   document.getElementById('btn-gerar').disabled=!(document.getElementById('nome-cliente').value.trim()&&arquivos.perfil);
 }
+
 function toBase64(file){
-  return new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result.split(',')[1]);r.onerror=rej;r.readAsDataURL(file);});
+  return new Promise((res,rej)=>{
+    const r=new FileReader();
+    r.onload=()=>res(r.result.split(',')[1]);
+    r.onerror=rej;
+    r.readAsDataURL(file);
+  });
 }
+
 function setProgress(pct,etapa,msg){
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-etapa').textContent=etapa||'';
   document.getElementById('progress-txt').textContent=msg||'';
 }
 
-async function chamarAPI(messages, system, maxTokens){
+async function chamarAPI(messages,system,maxTokens){
   const resp=await fetch('/api',{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':apiKey},
@@ -244,14 +245,14 @@ async function chamarAPI(messages, system, maxTokens){
   return data.content?.map(c=>c.text||'').join('')||'';
 }
 
-async function extrairPDF(file, tipo, nome){
+async function extrairPDF(file,tipo,nome){
   const b64=await toBase64(file);
-  const system=`Você é especialista em análise comportamental pelo Método EVO. Extraia com precisão todos os dados do relatório ${nome} enviado. Responda SOMENTE com os dados extraídos em formato estruturado, sem análise ou interpretação. Se um dado não existir no relatório, omita-o completamente.`;
+  const system='Você é especialista em análise comportamental pelo Método EVO. Extraia com precisão todos os dados do relatório '+nome+' enviado. Responda SOMENTE com os dados extraídos em formato estruturado, sem análise ou interpretação.';
   const messages=[{role:'user',content:[
     {type:'document',source:{type:'base64',media_type:'application/pdf',data:b64},title:nome},
-    {type:'text',text:`Extraia todos os dados disponíveis deste relatório ${nome}. Inclua: todos os percentuais, índices, pontuações, textos descritivos, rankings e qualquer informação relevante. Organize de forma clara e completa.`}
+    {type:'text',text:'Extraia todos os dados disponíveis deste relatório '+nome+'. Inclua todos os percentuais, índices, pontuações, textos descritivos e rankings.'}
   ]}];
-  return await chamarAPI(messages, system, 2000);
+  return await chamarAPI(messages,system,2000);
 }
 
 async function gerarDevolutiva(){
@@ -259,8 +260,10 @@ async function gerarDevolutiva(){
   const btn=document.getElementById('btn-gerar');
   const pb=document.getElementById('progress-box');
   const eb=document.getElementById('erro-box');
-  btn.disabled=true;btn.textContent='⏳ Processando...';
-  pb.style.display='block';eb.style.display='none';
+  btn.disabled=true;
+  btn.textContent='⏳ Processando...';
+  pb.style.display='block';
+  eb.style.display='none';
   dadosExtraidos={};
 
   try{
@@ -271,106 +274,26 @@ async function gerarDevolutiva(){
     for(const [tipo,nome] of tipos){
       if(!arquivos[tipo])continue;
       atual++;
-      setProgress(Math.round((atual-1)/total*50)+5, `Etapa ${atual} de ${total+2}`, `Lendo ${nome}...`);
+      setProgress(Math.round((atual-1)/total*50)+5,'Etapa '+atual+' de '+(total+2),'Lendo '+nome+'...');
       dadosExtraidos[tipo]=await extrairPDF(arquivos[tipo],tipo,nome);
     }
 
     setProgress(60,'Gerando devolutiva...','Analisando todos os dados...');
 
-    const dadosTexto=Object.entries(dadosExtraidos).map(([k,v])=>`=== ${k.toUpperCase()} ===\n${v}`).join('\n\n');
+    const dadosTexto=Object.entries(dadosExtraidos).map(([k,v])=>'=== '+k.toUpperCase()+' ===\n'+v).join('\n\n');
 
-    const systemDevolutiva=`Você é especialista em análise comportamental pelo Método EVO (Márcio e Michelle). Gera devolutivas DISC EVO profundas, acolhedoras e transformacionais.
+    const systemDevolutiva='Você é especialista em análise comportamental pelo Método EVO (Márcio e Michelle). Gera devolutivas DISC EVO profundas, acolhedoras e transformacionais. REGRAS: Use SOMENTE os dados fornecidos. Identifique o tipo de relatório (Gerencial/Pessoal/Básico). Nunca mencione índices que não existem. Bloco de liderança SOMENTE se Gerencial. AEM sempre em destaque com leitura por dimensão. IPS×IPM sempre em cruzamento. 2 pontos de melhoria por dimensão. Linguagem transformacional e acolhedora.';
 
-REGRAS CRÍTICAS:
-1. Use SOMENTE os dados fornecidos — nunca invente valores
-2. Identifique o tipo de relatório (Gerencial/Pessoal/Básico)
-3. NUNCA mencione índices ou blocos que não existem nos dados
-4. Perfil Gerencial: inclui liderança, motivadores, tomada de decisão
-5. Perfil Pessoal: sem liderança gerencial, sem motivadores gerenciais
-6. Perfil Básico: apenas perfil comportamental
-7. Se âncoras, forças ou linguagem não foram enviados, não mencione
-8. AEM: sempre em destaque com leitura por dimensão D,I,S,C
-9. IPS×IPM: sempre em cruzamento
-10. Pontos de melhoria: exatamente 2 por dimensão relevante
-11. APF: em destaque quando disponível
-12. Linguagem transformacional, acolhedora e direta`;
+    const prompt='Com base nos dados extraídos abaixo, gere a devolutiva completa de '+nomeCliente+' em HTML com h1, h2, h3, p, ul, li, strong, em.\n\nDADOS:\n'+dadosTexto+'\n\nESTRUTURA:\n<h1>Devolutiva — '+nomeCliente+'</h1>\n<h2>Dimensão 1 — Quem ela é</h2> (4 perfis DISC, composição, perfil descritivo, Fase 1×Fase 2)\n<h2>Dimensão 2 — Como ela se sente</h2> (pontos fortes×limitantes, top 6 autodesempenho, IPS×IPM)\n<h2>Dimensão 3 — O que o mundo pede</h2> (AEM em destaque por dimensão, APF)\n<h2>Dimensão 4 — O que a move</h2> (âncoras top 3, forças top 5 — só se enviados)\n<h2>Dimensão 5 — Como ela se relaciona</h2> (linguagem — só se enviado)\n<h2>Dimensão 6 — Como ela cresce</h2> (pontos melhoria, liderança e decisão só se Gerencial)\n<h2>Fechamento</h2> (3 perguntas finais)\n\nInclua 2 perguntas reflexivas em cada bloco.';
 
-    const promptDevolutiva=`Com base nos dados extraídos abaixo, gere a devolutiva completa de ${nomeCliente}.
-
-DADOS EXTRAÍDOS:
-${dadosTexto}
-
-Estruture usando HTML semântico com estas tags:
-- <h1> para o título principal
-- <h2> para cada dimensão (ex: Dimensão 1 — Quem ela é)
-- <h3> para cada subseção
-- <p> para textos
-- <ul><li> para listas
-- <strong> para destaques
-- <em> para ênfases
-
-ESTRUTURA OBRIGATÓRIA:
-
-<h1>Devolutiva — ${nomeCliente}</h1>
-
-<h2>Dimensão 1 — Quem ela é</h2>
-<h3>Os 4 perfis DISC</h3>
-[Cards D/I/S/C com 6 características + pergunta reflexiva]
-<h3>Gráfico de composição</h3>
-[Síntese de 3 linhas com percentuais reais]
-<h3>Perfil descritivo</h3>
-[Texto personalizado baseado nos dados]
-<h3>Fase 1 × Fase 2 — IDA</h3>
-[Explicação + pergunta — OMITIR se não tiver IDA]
-
-<h2>Dimensão 2 — Como ela se sente</h2>
-<h3>Pontos fortes × Limitantes</h3>
-[Dados reais por dimensão]
-<h3>Top 6 habilidades do autodesempenho</h3>
-[Com pontuações reais — OMITIR se não tiver]
-<h3>IPS × IPM</h3>
-[Cruzamento — OMITIR se não tiver]
-
-<h2>Dimensão 3 — O que o mundo pede dela</h2>
-<h3>AEM — Autopercepção da Exigência do Meio</h3>
-[Em DESTAQUE — valor geral + leitura por dimensão D,I,S,C — OMITIR se não tiver]
-<h3>APF — Aproveitamento dos Pontos Fortes</h3>
-[Em destaque — OMITIR se não tiver]
-
-<h2>Dimensão 4 — O que a move</h2>
-<h3>Âncoras de carreira</h3> [Top 3 com definição — OMITIR se não enviado]
-<h3>Forças pessoais</h3> [Top 5 com definição — OMITIR se não enviado]
-
-<h2>Dimensão 5 — Como ela se relaciona</h2>
-<h3>Linguagem de valorização</h3> [Trabalho e casa com definições — OMITIR se não enviado]
-
-<h2>Dimensão 6 — Como ela cresce</h2>
-<h3>Pontos de melhoria</h3> [2 por dimensão relevante]
-<h3>Estilo de liderança</h3> [SOMENTE se Gerencial]
-<h3>Tomada de decisão</h3> [SOMENTE se Gerencial]
-
-<h2>Fechamento — Plano de ação</h2>
-[3 perguntas: O que mais ficou? O que quer trabalhar? Como quer se ver em 6 meses?]
-
-Inclua 2 perguntas reflexivas em cada bloco. Linguagem acolhedora e transformacional.`;
-
-    const messages=[{role:'user',content:promptDevolutiva}];
-    textoFinal=await chamarAPI(messages,systemDevolutiva,5000);
+    textoFinal=await chamarAPI([{role:'user',content:prompt}],systemDevolutiva,5000);
 
     setProgress(85,'Gerando devolutiva escrita...','Preparando texto para a cliente...');
 
-    const promptNarrativo=`Com base nos mesmos dados de ${nomeCliente}, gere a DEVOLUTIVA ESCRITA — texto corrido para enviar à cliente após a sessão.
+    const promptN='Com base nos dados de '+nomeCliente+', gere a DEVOLUTIVA ESCRITA — texto corrido para enviar à cliente. Em 2ª pessoa, tom transformacional, 800-1200 palavras. Inclua só o que tem dados.\n\nDADOS:\n'+dadosTexto;
+    textoNarrativo=await chamarAPI([{role:'user',content:promptN}],systemDevolutiva,3000);
 
-DADOS:
-${dadosTexto}
-
-Escreva em 2ª pessoa, tom transformacional e acolhedor. Entre 800 e 1200 palavras. Use os títulos das 6 dimensões mas em texto contínuo e fluido. Cada parágrafo deve soar escrito especificamente para ${nomeCliente}.
-
-Inclua SOMENTE as dimensões com dados disponíveis. Se não tiver âncoras, não mencione. Se não for Gerencial, sem liderança.`;
-
-    textoNarrativo=await chamarAPI([{role:'user',content:promptNarrativo}],systemDevolutiva,3000);
-
-    setProgress(100,'✅ Pronto!','Devolutiva completa gerada com sucesso!');
+    setProgress(100,'✅ Pronto!','Devolutiva completa!');
     setTimeout(()=>{pb.style.display='none';mostrarResultado();},1500);
 
   }catch(e){
@@ -378,7 +301,8 @@ Inclua SOMENTE as dimensões com dados disponíveis. Se não tiver âncoras, nã
     eb.style.display='block';
     pb.style.display='none';
   }finally{
-    btn.disabled=false;btn.textContent='✨ Gerar devolutiva completa';
+    btn.disabled=false;
+    btn.textContent='✨ Gerar devolutiva completa';
     verificarPronto();
   }
 }
@@ -418,8 +342,12 @@ function salvarHTML(){
   const blob=new Blob([html],{type:'text/html;charset=utf-8'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a');
-  a.href=url;a.download='devolutiva_'+nomeCliente.toLowerCase().replace(/\s+/g,'_')+'.html';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+  a.href=url;
+  a.download='devolutiva_'+nomeCliente.toLowerCase().replace(/\s+/g,'_')+'.html';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 </script>
 </body>
