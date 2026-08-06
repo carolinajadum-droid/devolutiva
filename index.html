@@ -3,83 +3,125 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Devolutiva DISC EVO</title>
+<title>Devolutiva DISC EVO — Carol Jadum</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lato:wght@300;400;700&display=swap');
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--sage:#A8B8A3;--deep-sage:#8FA38B;--light-sage:#DCE7D8;--off-white:#F7F5F0;--graphite:#3F3F3F;--beige:#E7DED2;--beige-dark:#D4C9BB;--sage-dark:#6B8066;--sage-text:#2D4A2A;--radius:12px}
+:root{
+  --sage:#A8B8A3;--deep-sage:#8FA38B;--light-sage:#DCE7D8;
+  --off-white:#F7F5F0;--graphite:#3F3F3F;--beige:#E7DED2;
+  --beige-dark:#D4C9BB;--sage-dark:#6B8066;--sage-text:#2D4A2A;
+  --radius:12px;
+}
 body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graphite);min-height:100vh;font-size:14px;line-height:1.6}
+
+/* CONFIG */
 .config-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:2rem}
 .config-box{background:#fff;border-radius:16px;border:1px solid var(--beige-dark);padding:2.5rem;max-width:460px;width:100%}
 .config-logo{text-align:center;margin-bottom:2rem}
-.config-logo-icon{width:60px;height:60px;border-radius:50%;background:var(--light-sage);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:28px}
-.config-logo h1{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--graphite);margin-bottom:6px}
+.config-logo-icon{width:64px;height:64px;border-radius:50%;background:var(--light-sage);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px}
+.config-logo h1{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--graphite);margin-bottom:4px}
 .config-logo p{font-size:13px;color:#888;line-height:1.6}
 .form-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--sage-dark);display:block;margin-bottom:6px}
-.form-input{width:100%;padding:10px 14px;border:1px solid var(--beige-dark);border-radius:8px;font-size:13px;font-family:'Lato',sans-serif;color:var(--graphite);margin-bottom:6px}
+.form-input{width:100%;padding:10px 14px;border:1px solid var(--beige-dark);border-radius:8px;font-size:13px;font-family:'Lato',sans-serif;color:var(--graphite);margin-bottom:6px;outline:none}
+.form-input:focus{border-color:var(--deep-sage)}
 .form-hint{font-size:11px;color:#aaa;margin-bottom:16px}
 .form-hint a{color:var(--deep-sage)}
 .btn-primary{width:100%;padding:12px;background:var(--deep-sage);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif}
+.btn-primary:hover{background:var(--sage-dark)}
 .config-erro{display:none;margin-top:10px;padding:8px 12px;background:#FCEBEB;border-radius:8px;font-size:12px;color:#8B2A2A;text-align:center}
+
+/* TOPO */
 .topo{background:var(--deep-sage);position:sticky;top:0;z-index:100;box-shadow:0 2px 16px rgba(0,0,0,0.12)}
-.topo-inner{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.topo-info{display:flex;align-items:center;gap:12px}
-.topo-av{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;font-family:'Playfair Display',serif;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.3)}
-.topo-nome{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:1px}
+.topo-inner{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.topo-brand{display:flex;align-items:center;gap:10px}
+.topo-av{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;border:1.5px solid rgba(255,255,255,0.3)}
+.topo-nome{font-family:'Playfair Display',serif;font-size:16px;font-weight:600;color:#fff}
 .topo-sub{font-size:11px;color:rgba(255,255,255,0.7)}
-.topo-btn{padding:7px 14px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.15);border:none;border-radius:7px;cursor:pointer}
-.topo-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.modo-toggle{display:flex;background:rgba(255,255,255,0.15);border-radius:7px;overflow:hidden}
-.modo-btn{padding:7px 14px;font-size:12px;font-weight:700;color:rgba(255,255,255,0.7);cursor:pointer;border:none;background:transparent}
-.modo-btn.ativo{background:rgba(255,255,255,0.25);color:#fff}
-.btn-salvar{padding:7px 14px;font-size:12px;font-weight:700;color:var(--deep-sage);background:#fff;border:none;border-radius:7px;cursor:pointer;display:flex;align-items:center;gap:5px}
-.upload-wrap{max-width:600px;margin:0 auto;padding:2rem 1.5rem 4rem}
+.topo-btn{padding:6px 12px;font-size:11px;font-weight:700;color:rgba(255,255,255,0.8);background:rgba(255,255,255,0.15);border:none;border-radius:6px;cursor:pointer}
+
+/* UPLOAD */
+.upload-wrap{max-width:680px;margin:0 auto;padding:2rem 1.5rem 4rem}
 .upload-card{background:#fff;border-radius:16px;border:1px solid var(--beige-dark);overflow:hidden;margin-bottom:1.5rem}
-.upload-card-head{background:var(--light-sage);padding:16px 20px}
-.upload-card-titulo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--sage-text)}
-.upload-card-sub{font-size:12px;color:var(--sage-dark);margin-top:2px}
-.upload-card-body{padding:20px}
+.upload-head{background:var(--light-sage);padding:16px 20px}
+.upload-titulo{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--sage-text)}
+.upload-sub-txt{font-size:12px;color:var(--sage-dark);margin-top:2px}
+.upload-body{padding:20px}
 .nome-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--sage-dark);display:block;margin-bottom:6px}
-.nome-input{width:100%;padding:10px 14px;border:1px solid var(--beige-dark);border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;color:var(--graphite);margin-bottom:20px}
-.slot{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--beige-dark);border-radius:8px;margin-bottom:8px;cursor:pointer;transition:all 0.15s;background:var(--off-white)}
+.nome-input{width:100%;padding:10px 14px;border:1px solid var(--beige-dark);border-radius:8px;font-size:14px;font-family:'Lato',sans-serif;color:var(--graphite);margin-bottom:20px;outline:none}
+.nome-input:focus{border-color:var(--deep-sage)}
+.sec-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--sage-dark);margin-bottom:8px;margin-top:4px;display:block}
+.slot{display:flex;align-items:center;gap:12px;padding:11px 14px;border:1px solid var(--beige-dark);border-radius:8px;margin-bottom:7px;cursor:pointer;transition:all 0.15s;background:var(--off-white)}
 .slot:hover{border-color:var(--sage);background:var(--light-sage)}
 .slot.loaded{border-color:var(--deep-sage);background:#EAF2E8}
-.slot-emoji{font-size:20px;flex-shrink:0}
+.slot-emoji{font-size:18px;flex-shrink:0}
 .slot-info{flex:1}
 .slot-nome{font-size:13px;font-weight:700;color:var(--graphite)}
 .slot-hint{font-size:11px;color:#aaa}
 .slot-status{font-size:11px;color:#aaa;white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis}
 .slot.loaded .slot-status{color:var(--deep-sage);font-weight:700}
-.btn-gerar{width:100%;padding:14px;background:var(--deep-sage);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;margin-top:4px}
+.btn-gerar{width:100%;padding:14px;background:var(--deep-sage);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;margin-top:8px}
 .btn-gerar:disabled{opacity:0.35;cursor:not-allowed}
+.btn-gerar:hover:not(:disabled){background:var(--sage-dark)}
+
+/* PROGRESSO */
 .progress-box{background:#fff;border-radius:12px;border:1px solid var(--beige-dark);padding:20px;margin-top:1.5rem;display:none}
-.progress-bar-bg{height:6px;background:var(--light-sage);border-radius:3px;margin-bottom:12px;overflow:hidden}
+.progress-bar-bg{height:5px;background:var(--light-sage);border-radius:3px;margin-bottom:10px;overflow:hidden}
 .progress-bar-fill{height:100%;background:var(--deep-sage);border-radius:3px;width:0%;transition:width 0.5s}
-.progress-etapa{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--sage-dark);margin-bottom:4px}
+.progress-etapa{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--sage-dark);margin-bottom:3px}
 .progress-txt{font-size:13px;color:var(--graphite)}
-.erro-box{display:none;margin-top:1rem;padding:10px 14px;background:#FCEBEB;border-radius:8px;font-size:13px;color:#8B2A2A;text-align:center}
-.container{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
-.resultado-texto{background:#fff;border-radius:var(--radius);border:1px solid var(--beige-dark);padding:2rem;font-size:14px;line-height:1.85;color:var(--graphite)}
-.resultado-texto h1{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--sage-text);margin:0 0 1.5rem;padding-bottom:12px;border-bottom:1px solid var(--light-sage)}
-.resultado-texto h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--sage-text);margin:2rem 0 0.8rem;padding:12px 16px;background:var(--light-sage);border-radius:8px}
-.resultado-texto h3{font-size:14px;font-weight:700;color:var(--sage-dark);margin:1.2rem 0 0.5rem;text-transform:uppercase;letter-spacing:0.05em}
-.resultado-texto p{margin-bottom:0.8rem}
-.resultado-texto ul,.resultado-texto ol{margin:0.5rem 0 0.8rem 1.5rem}
-.resultado-texto li{margin-bottom:0.3rem}
-.resultado-texto strong{font-weight:700;color:#1A1A1A}
-.resultado-texto em{font-style:italic;color:#555}
-.resultado-narrativo{display:none}
-@media print{.topo,.upload-wrap,.btn-salvar,.topo-btn,.modo-toggle{display:none!important}.container{padding:1rem}}
+.erro-box{display:none;margin-top:1rem;padding:10px 14px;background:#FCEBEB;border-radius:8px;font-size:13px;color:#8B2A2A}
+
+/* RESULTADO */
+.resultado-wrap{max-width:1100px;margin:0 auto;padding:1.5rem 1.5rem 4rem;display:none}
+.resultado-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:10px}
+.resultado-nome{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--sage-text)}
+.resultado-nome small{display:block;font-size:12px;font-weight:400;font-family:'Lato',sans-serif;color:var(--sage-dark);margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em}
+.resultado-acoes{display:flex;gap:8px;flex-wrap:wrap}
+
+/* GRUPOS DE ABAS */
+.tab-grupos{margin-bottom:0}
+.grupo-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--sage-dark);padding:8px 0 4px;margin-top:4px}
+.tabs-nav{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:0;border-bottom:2px solid var(--beige-dark)}
+.tab-btn{padding:9px 14px;font-size:12px;font-weight:600;color:var(--sage-dark);background:transparent;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;cursor:pointer;transition:all 0.15s;white-space:nowrap;border-radius:6px 6px 0 0}
+.tab-btn:hover{background:var(--light-sage);color:var(--sage-text)}
+.tab-btn.ativo{background:#fff;color:var(--sage-text);border-bottom-color:var(--deep-sage)}
+.tab-btn.grupo-lideranca{color:#7A4205}
+.tab-btn.grupo-lideranca.ativo{border-bottom-color:#E67E22}
+.tab-btn.grupo-instrumentos{color:#0C447C}
+.tab-btn.grupo-instrumentos.ativo{border-bottom-color:#2980B9}
+
+/* PAINEL */
+.tab-panel{display:none;background:#fff;border:1px solid var(--beige-dark);border-top:none;border-radius:0 0 12px 12px;padding:28px 32px;min-height:400px}
+.tab-panel.ativo{display:block}
+.tab-panel h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--sage-text);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--light-sage)}
+.tab-panel h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;color:var(--sage-dark);margin:22px 0 10px}
+.tab-panel h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--sage-dark);margin:16px 0 8px}
+.tab-panel p{font-size:14px;line-height:1.8;color:var(--graphite);margin-bottom:12px}
+.tab-panel ul,.tab-panel ol{padding-left:22px;margin-bottom:12px}
+.tab-panel li{font-size:14px;line-height:1.7;color:var(--graphite);margin-bottom:5px}
+.tab-panel strong{color:#1A1A1A;font-weight:700}
+.tab-panel em{color:var(--sage-dark);font-style:italic}
+.tab-panel table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+.tab-panel th{padding:8px 12px;text-align:left;background:var(--light-sage);color:var(--sage-dark);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.04em}
+.tab-panel td{padding:8px 12px;border-top:1px solid var(--beige)}
+
+/* BOTÃO COPIAR */
+.btn-copiar{display:flex;align-items:center;gap:6px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--sage-dark);background:var(--light-sage);border:none;border-radius:6px;cursor:pointer;margin-bottom:16px}
+.btn-copiar:hover{background:var(--beige)}
+
+@media print{.topo,.upload-wrap,.resultado-acoes,.btn-copiar{display:none!important}.resultado-wrap{padding:1rem}}
 </style>
 </head>
 <body>
 
+<!-- TELA CONFIG -->
 <div id="tela-config" class="config-wrap">
   <div class="config-box">
     <div class="config-logo">
       <div class="config-logo-icon">🌿</div>
       <h1>Devolutiva DISC EVO</h1>
-      <p>Insira sua chave de API da Anthropic para começar.<br>Ela fica salva só no seu navegador.</p>
+      <p>Carol Jadum · Mulher Inteira<br>Insira sua chave de API para começar.</p>
     </div>
     <label class="form-label">Chave de API (Anthropic)</label>
     <input type="password" id="api-key-input" class="form-input" placeholder="sk-ant-api03-...">
@@ -89,25 +131,29 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
   </div>
 </div>
 
-<div id="tela-app" style="display:none;">
+<!-- TELA APP -->
+<div id="tela-app" style="display:none">
   <div class="topo">
     <div class="topo-inner">
-      <div class="topo-info">
+      <div class="topo-brand">
         <div class="topo-av">🌿</div>
-        <div><div class="topo-nome">Devolutiva DISC EVO</div><div class="topo-sub">Método EVO — Márcio e Michelle</div></div>
+        <div><div class="topo-nome">Devolutiva DISC EVO</div><div class="topo-sub">Carol Jadum · Mulher Inteira</div></div>
       </div>
       <button class="topo-btn" onclick="trocarChave()">⚙ Trocar chave</button>
     </div>
   </div>
+
   <div class="upload-wrap">
     <div class="upload-card">
-      <div class="upload-card-head">
-        <div class="upload-card-titulo">Nova devolutiva</div>
-        <div class="upload-card-sub">Perfil DISC obrigatório — demais são opcionais</div>
+      <div class="upload-head">
+        <div class="upload-titulo">Nova devolutiva</div>
+        <div class="upload-sub-txt">Perfil DISC obrigatório — demais são opcionais</div>
       </div>
-      <div class="upload-card-body">
+      <div class="upload-body">
         <label class="nome-label">Nome da cliente</label>
-        <input type="text" id="nome-cliente" class="nome-input" placeholder="Ex: Viviane Luna" oninput="verificarPronto()">
+        <input type="text" id="nome-cliente" class="nome-input" placeholder="Ex: Patriny Souza" oninput="verificarPronto()">
+
+        <span class="sec-label">📄 Relatórios DISC</span>
         <div class="slot" id="slot-perfil" onclick="document.getElementById('file-perfil').click()">
           <div class="slot-emoji">📋</div>
           <div class="slot-info"><div class="slot-nome">Perfil DISC</div><div class="slot-hint">Gerencial, Pessoal ou Básico — obrigatório</div></div>
@@ -132,8 +178,29 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
           <div class="slot-status" id="status-linguagem">Clique para anexar</div>
           <input type="file" id="file-linguagem" accept=".pdf" style="display:none" onchange="handleSlot('linguagem',this)">
         </div>
+
+        <span class="sec-label" style="margin-top:16px">🗺 Mapas de Autodesempenho (opcionais)</span>
+        <div class="slot" id="slot-mapa1" onclick="document.getElementById('file-mapa1').click()">
+          <div class="slot-emoji">🟢</div>
+          <div class="slot-info"><div class="slot-nome">Como acredito que estou</div><div class="slot-hint">imagem — opcional</div></div>
+          <div class="slot-status" id="status-mapa1">Clique para anexar</div>
+          <input type="file" id="file-mapa1" accept="image/*" style="display:none" onchange="handleSlot('mapa1',this)">
+        </div>
+        <div class="slot" id="slot-mapa2" onclick="document.getElementById('file-mapa2').click()">
+          <div class="slot-emoji">🔵</div>
+          <div class="slot-info"><div class="slot-nome">Como deveria estar</div><div class="slot-hint">imagem — opcional</div></div>
+          <div class="slot-status" id="status-mapa2">Clique para anexar</div>
+          <input type="file" id="file-mapa2" accept="image/*" style="display:none" onchange="handleSlot('mapa2',this)">
+        </div>
+        <div class="slot" id="slot-mapa3" onclick="document.getElementById('file-mapa3').click()">
+          <div class="slot-emoji">🟠</div>
+          <div class="slot-info"><div class="slot-nome">Sobreposição dos mapas</div><div class="slot-hint">imagem — opcional</div></div>
+          <div class="slot-status" id="status-mapa3">Clique para anexar</div>
+          <input type="file" id="file-mapa3" accept="image/*" style="display:none" onchange="handleSlot('mapa3',this)">
+        </div>
       </div>
     </div>
+
     <button id="btn-gerar" class="btn-gerar" onclick="gerarDevolutiva()" disabled>✨ Gerar devolutiva completa</button>
     <div id="progress-box" class="progress-box">
       <div class="progress-bar-bg"><div id="progress-fill" class="progress-bar-fill"></div></div>
@@ -144,59 +211,51 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
   </div>
 </div>
 
-<div id="tela-resultado" style="display:none;">
+<!-- RESULTADO -->
+<div id="tela-resultado" style="display:none">
   <div class="topo">
     <div class="topo-inner">
-      <div class="topo-info">
+      <div class="topo-brand">
         <div class="topo-av" id="res-av">VL</div>
-        <div><div class="topo-nome" id="res-nome">Viviane Luna</div><div class="topo-sub">Devolutiva DISC EVO</div></div>
+        <div><div class="topo-nome" id="res-nome">—</div><div class="topo-sub" id="res-tipo">Devolutiva DISC EVO</div></div>
       </div>
-      <div class="topo-actions">
+      <div class="resultado-acoes">
         <button class="topo-btn" onclick="novaDevolutiva()">← Nova cliente</button>
-        <div class="modo-toggle">
-          <button class="modo-btn ativo" onclick="setModo('cards',this)">Cards</button>
-          <button class="modo-btn" onclick="setModo('narrativo',this)">Narrativo</button>
-        </div>
-        <button class="btn-salvar" onclick="salvarHTML()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Salvar HTML
-        </button>
+        <button class="topo-btn" onclick="salvarHTML()">⬇ Salvar HTML</button>
       </div>
     </div>
   </div>
-  <div class="container">
-    <div id="resultado-cards" class="resultado-texto"></div>
-    <div id="resultado-narrativo" class="resultado-texto resultado-narrativo"></div>
+
+  <div class="resultado-wrap" id="resultado-wrap">
+    <!-- tabs geradas dinamicamente -->
   </div>
 </div>
 
 <script>
 let apiKey='';
-let arquivos={perfil:null,ancora:null,forca:null,linguagem:null};
+let arquivos={perfil:null,ancora:null,forca:null,linguagem:null,mapa1:null,mapa2:null,mapa3:null};
 let nomeCliente='';
-let dadosExtraidos={};
-let textoFinal='';
-let textoNarrativo='';
+let dadosGerados={};
 
+// ── AUTH ──
 function salvarChave(){
   const k=document.getElementById('api-key-input').value.trim();
   if(!k.startsWith('sk-ant-')){
-    document.getElementById('config-erro').textContent='Chave inválida. Deve começar com sk-ant-';
-    document.getElementById('config-erro').style.display='block';
-    return;
+    mostrarErroConfig('Chave inválida. Deve começar com sk-ant-');return;
   }
-  apiKey=k;
-  localStorage.setItem('disc_key',k);
+  apiKey=k;localStorage.setItem('disc_key',k);
   document.getElementById('tela-config').style.display='none';
   document.getElementById('tela-app').style.display='block';
 }
-
+function mostrarErroConfig(msg){
+  const el=document.getElementById('config-erro');
+  el.textContent=msg;el.style.display='block';
+}
 function trocarChave(){
   document.getElementById('tela-config').style.display='flex';
   document.getElementById('tela-app').style.display='none';
   document.getElementById('tela-resultado').style.display='none';
 }
-
 window.onload=function(){
   const s=localStorage.getItem('disc_key');
   if(s&&s.startsWith('sk-ant-')){
@@ -206,19 +265,19 @@ window.onload=function(){
   }
 };
 
+// ── UPLOAD ──
 function handleSlot(tipo,input){
-  const f=input.files[0];
-  if(!f)return;
+  const f=input.files[0];if(!f)return;
   arquivos[tipo]=f;
   document.getElementById('slot-'+tipo).classList.add('loaded');
   document.getElementById('status-'+tipo).textContent=f.name.length>30?f.name.substring(0,28)+'…':f.name;
   verificarPronto();
 }
-
 function verificarPronto(){
   document.getElementById('btn-gerar').disabled=!(document.getElementById('nome-cliente').value.trim()&&arquivos.perfil);
 }
 
+// ── BASE64 ──
 function toBase64(file){
   return new Promise((res,rej)=>{
     const r=new FileReader();
@@ -227,112 +286,275 @@ function toBase64(file){
     r.readAsDataURL(file);
   });
 }
+function getMediaType(file){
+  if(file.type)return file.type;
+  const ext=file.name.split('.').pop().toLowerCase();
+  const map={pdf:'application/pdf',jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',gif:'image/gif',webp:'image/webp'};
+  return map[ext]||'application/octet-stream';
+}
 
+// ── PROGRESS ──
 function setProgress(pct,etapa,msg){
   document.getElementById('progress-fill').style.width=pct+'%';
   document.getElementById('progress-etapa').textContent=etapa||'';
   document.getElementById('progress-txt').textContent=msg||'';
 }
 
+// ── API ──
 async function chamarAPI(messages,system,maxTokens){
   const resp=await fetch('/api',{
     method:'POST',
     headers:{'Content-Type':'application/json','x-api-key':apiKey},
-    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:maxTokens||3000,system:system||'',messages})
+    body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:maxTokens||4000,system:system||'',messages})
   });
-  const data=await resp.json();
+  let data;
+  try{data=await resp.json();}
+  catch(e){throw new Error('Resposta inválida do servidor');}
   if(!resp.ok||data.error)throw new Error(data.error?.message||'Erro na API');
   return data.content?.map(c=>c.text||'').join('')||'';
 }
 
-async function extrairPDF(file,tipo,nome){
+// ── EXTRAÇÃO PDF ──
+async function extrairPDF(file,nome){
   const b64=await toBase64(file);
-  const system='Você é especialista em análise comportamental pelo Método EVO. Extraia com precisão todos os dados do relatório '+nome+' enviado. Responda SOMENTE com os dados extraídos em formato estruturado, sem análise ou interpretação.';
-  const messages=[{role:'user',content:[
-    {type:'document',source:{type:'base64',media_type:'application/pdf',data:b64},title:nome},
-    {type:'text',text:'Extraia todos os dados disponíveis deste relatório '+nome+'. Inclua todos os percentuais, índices, pontuações, textos descritivos e rankings.'}
-  ]}];
-  return await chamarAPI(messages,system,2000);
+  const mt=getMediaType(file);
+  const isImg=mt.startsWith('image/');
+  const content=isImg
+    ?[{type:'image',source:{type:'base64',media_type:mt,data:b64}},{type:'text',text:'Extraia todos os dados visíveis nesta imagem do mapa de autodesempenho DISC EVO. Liste todas as habilidades com suas pontuações.'}]
+    :[{type:'document',source:{type:'base64',media_type:'application/pdf',data:b64},title:nome},{type:'text',text:'Extraia TODOS os dados deste relatório '+nome+': percentuais, índices, pontuações, textos descritivos, rankings. Seja completo e preciso.'}];
+  const system='Você é especialista DISC EVO. Extraia os dados com precisão máxima. Inclua todos os valores numéricos, percentuais e textos do relatório. Organize claramente.';
+  return await chamarAPI([{role:'user',content}],system,2500);
 }
 
+// ── GERAR ──
 async function gerarDevolutiva(){
   nomeCliente=document.getElementById('nome-cliente').value.trim();
   const btn=document.getElementById('btn-gerar');
   const pb=document.getElementById('progress-box');
   const eb=document.getElementById('erro-box');
-  btn.disabled=true;
-  btn.textContent='⏳ Processando...';
-  pb.style.display='block';
-  eb.style.display='none';
-  dadosExtraidos={};
+  btn.disabled=true;btn.textContent='⏳ Gerando...';
+  pb.style.display='block';eb.style.display='none';
+  dadosGerados={};
 
   try{
-    const tipos=[['perfil','Perfil DISC'],['ancora','Âncoras de Carreira'],['forca','Forças Pessoais'],['linguagem','Linguagem de Valorização']];
-    const total=tipos.filter(([t])=>arquivos[t]).length;
+    // ETAPA 1: Extrair PDFs
+    const slots=[
+      ['perfil','Perfil DISC'],
+      ['ancora','Âncoras de Carreira'],
+      ['forca','Forças Pessoais'],
+      ['linguagem','Linguagem de Valorização'],
+      ['mapa1','Mapa Como Estou'],
+      ['mapa2','Mapa Como Deveria Estar'],
+      ['mapa3','Sobreposição dos Mapas']
+    ];
+    const disponiveis=slots.filter(([k])=>arquivos[k]);
+    const total=disponiveis.length;
     let atual=0;
+    const dadosExtraidos={};
 
-    for(const [tipo,nome] of tipos){
-      if(!arquivos[tipo])continue;
+    for(const [tipo,nome] of disponiveis){
       atual++;
-      setProgress(Math.round((atual-1)/total*50)+5,'Etapa '+atual+' de '+(total+2),'Lendo '+nome+'...');
-      dadosExtraidos[tipo]=await extrairPDF(arquivos[tipo],tipo,nome);
+      setProgress(Math.round((atual-1)/total*45)+5,`Etapa ${atual} de ${total+2}`,`Lendo ${nome}...`);
+      dadosExtraidos[tipo]=await extrairPDF(arquivos[tipo],nome);
     }
 
-    setProgress(60,'Gerando devolutiva...','Analisando todos os dados...');
+    setProgress(55,'Identificando tipo de relatório...','Analisando dados extraídos...');
 
-    const dadosTexto=Object.entries(dadosExtraidos).map(([k,v])=>'=== '+k.toUpperCase()+' ===\n'+v).join('\n\n');
+    const dadosTexto=Object.entries(dadosExtraidos).map(([k,v])=>`=== ${k.toUpperCase()} ===\n${v}`).join('\n\n');
 
-    const systemDevolutiva='Você é especialista em análise comportamental pelo Método EVO (Márcio e Michelle). Gera devolutivas DISC EVO profundas, acolhedoras e transformacionais. REGRAS: Use SOMENTE os dados fornecidos. Identifique o tipo de relatório (Gerencial/Pessoal/Básico). Nunca mencione índices que não existem. Bloco de liderança SOMENTE se Gerencial. AEM sempre em destaque com leitura por dimensão. IPS×IPM sempre em cruzamento. 2 pontos de melhoria por dimensão. Linguagem transformacional e acolhedora.';
+    // Detectar tipo
+    const tipoResp=await chamarAPI([{role:'user',content:`Com base nos dados abaixo, responda apenas: GERENCIAL, PESSOAL ou BASICO\n\n${dadosTexto.substring(0,2000)}`}],'',100);
+    const tipoRelatorio=tipoResp.toUpperCase().includes('GERENCIAL')?'GERENCIAL':tipoResp.toUpperCase().includes('BASICO')?'BASICO':'PESSOAL';
 
-    const prompt='Com base nos dados extraídos abaixo, gere a devolutiva completa de '+nomeCliente+' em HTML com h1, h2, h3, p, ul, li, strong, em.\n\nDADOS:\n'+dadosTexto+'\n\nESTRUTURA:\n<h1>Devolutiva — '+nomeCliente+'</h1>\n<h2>Dimensão 1 — Quem ela é</h2> (4 perfis DISC, composição, perfil descritivo, Fase 1×Fase 2)\n<h2>Dimensão 2 — Como ela se sente</h2> (pontos fortes×limitantes, top 6 autodesempenho, IPS×IPM)\n<h2>Dimensão 3 — O que o mundo pede</h2> (AEM em destaque por dimensão, APF)\n<h2>Dimensão 4 — O que a move</h2> (âncoras top 3, forças top 5 — só se enviados)\n<h2>Dimensão 5 — Como ela se relaciona</h2> (linguagem — só se enviado)\n<h2>Dimensão 6 — Como ela cresce</h2> (pontos melhoria, liderança e decisão só se Gerencial)\n<h2>Fechamento</h2> (3 perguntas finais)\n\nInclua 2 perguntas reflexivas em cada bloco.';
+    setProgress(65,'Gerando 13 seções...','Construindo devolutiva completa...');
 
-    textoFinal=await chamarAPI([{role:'user',content:prompt}],systemDevolutiva,5000);
+    const systemDevolutiva=`Você é Carol Jadum, especialista em análise comportamental DISC EVO do programa Mulher Inteira.
+Gere uma devolutiva DISC EVO completa para ${nomeCliente} (Tipo: ${tipoRelatorio}).
 
-    setProgress(85,'Gerando devolutiva escrita...','Preparando texto para a cliente...');
+REGRAS CRÍTICAS:
+1. Use SOMENTE dados dos relatórios fornecidos — NUNCA invente valores
+2. Tipo ${tipoRelatorio}: ${tipoRelatorio==='GERENCIAL'?'inclui TODAS as 13 seções incluindo liderança':tipoRelatorio==='BASICO'?'inclui apenas seções básicas, SEM liderança, AEM, IPS/IPM':'inclui seções intermediárias, SEM liderança gerencial'}
+3. AEM: sempre em destaque com leitura ISOLADA por dimensão D, I, S, C — explique o que o meio está exigindo em cada uma
+4. IPS×IPM: sempre em cruzamento — 4 quadrantes (Excelência/Tensão/Desenvolvimento/Atenção)
+5. IDA = distância entre Fase 1 e Fase 2
+6. Pontos de melhoria: EXATAMENTE 2 por dimensão relevante, escolhidos pelos dados
+7. Liderança: SOMENTE se GERENCIAL — inclui estilo, motivadores, tomada de decisão
+8. Linguagem acolhedora, transformacional, em 2ª pessoa quando falando com a cliente
+9. NUNCA use blocos de código markdown (sem \`\`\`html)
 
-    const promptN='Com base nos dados de '+nomeCliente+', gere a DEVOLUTIVA ESCRITA — texto corrido para enviar à cliente. Em 2ª pessoa, tom transformacional, 800-1200 palavras. Inclua só o que tem dados.\n\nDADOS:\n'+dadosTexto;
-    textoNarrativo=await chamarAPI([{role:'user',content:promptN}],systemDevolutiva,3000);
+Retorne um JSON válido com estas chaves (use apenas as relevantes para o tipo ${tipoRelatorio}):
+roteiro, perfil_indices, mapas_autodesempenho, aem, ips_ipm, pontos_melhoria, estilo_lideranca, motivadores, tomada_decisao, ancoras, forcas, linguagem, devolutiva_escrita
+
+Cada valor deve ser HTML puro com h3, p, ul, li, strong, em, table. Use as cores:
+- D: #C0392B, I: #E67E22, S: #27AE60, C: #2980B9
+- Cards: background:#F7F5F0; border-left: 4px solid [cor]; border-radius:8px; padding:14px; margin:8px 0
+- Alertas: background:#DCE7D8; border-radius:8px; padding:12px; margin:10px 0
+- Destaque: background:#EDE8E0; border-radius:8px; padding:14px; margin:10px 0`;
+
+    const prompt=`Analise os dados extraídos de ${nomeCliente} e gere a devolutiva DISC EVO completa.
+
+DADOS EXTRAÍDOS:
+${dadosTexto}
+
+Gere o JSON com todas as seções relevantes para perfil ${tipoRelatorio}. HTML puro em cada seção, sem markdown.`;
+
+    setProgress(75,'Gerando conteúdo...','Isso pode levar 1-2 minutos...');
+
+    const resposta=await chamarAPI([{role:'user',content:prompt}],systemDevolutiva,6000);
+
+    setProgress(92,'Processando resultado...','Montando as abas...');
+
+    // Parse JSON
+    let resultado;
+    try{
+      let json=resposta.trim().replace(/^```json\s*/i,'').replace(/^```\s*/i,'').replace(/```\s*$/i,'').trim();
+      resultado=JSON.parse(json);
+    }catch(e){
+      const match=resposta.match(/\{[\s\S]*\}/);
+      if(match)resultado=JSON.parse(match[0]);
+      else throw new Error('Não foi possível processar o resultado. Tente novamente.');
+    }
+
+    dadosGerados=resultado;
+    dadosGerados._tipo=tipoRelatorio;
+    dadosGerados._nome=nomeCliente;
 
     setProgress(100,'✅ Pronto!','Devolutiva completa!');
-    setTimeout(()=>{pb.style.display='none';mostrarResultado();},1500);
+    setTimeout(()=>{pb.style.display='none';mostrarResultado();},1200);
 
   }catch(e){
     eb.textContent='Erro: '+(e.message||'Tente novamente.');
     eb.style.display='block';
     pb.style.display='none';
-  }finally{
-    btn.disabled=false;
-    btn.textContent='✨ Gerar devolutiva completa';
+    btn.disabled=false;btn.textContent='✨ Gerar devolutiva completa';
     verificarPronto();
   }
 }
 
+// ── ABAS ──
+const ABAS_GERAL=[
+  {key:'roteiro',label:'① Roteiro ao Vivo'},
+  {key:'perfil_indices',label:'② Perfil + Índices'},
+  {key:'mapas_autodesempenho',label:'③ Mapas'},
+  {key:'aem',label:'④ AEM'},
+  {key:'ips_ipm',label:'⑤ IPS × IPM'},
+  {key:'pontos_melhoria',label:'⑥ Pontos de Melhoria'},
+];
+const ABAS_LIDERANCA=[
+  {key:'estilo_lideranca',label:'Estilo de Liderança'},
+  {key:'motivadores',label:'Motivadores'},
+  {key:'tomada_decisao',label:'Tomada de Decisão'},
+];
+const ABAS_INSTRUMENTOS=[
+  {key:'ancoras',label:'Âncoras de Carreira'},
+  {key:'forcas',label:'Forças Pessoais'},
+  {key:'linguagem',label:'Linguagem de Valorização'},
+  {key:'devolutiva_escrita',label:'Devolutiva Escrita'},
+];
+const TITULOS={
+  roteiro:'Roteiro ao Vivo',perfil_indices:'Perfil DISC + Índices',
+  mapas_autodesempenho:'Mapas de Autodesempenho',aem:'AEM — Autopercepção da Exigência do Meio',
+  ips_ipm:'IPS × IPM — Cruzamento dos Índices',pontos_melhoria:'Pontos de Melhoria',
+  estilo_lideranca:'Estilo de Liderança',motivadores:'Motivadores e Palavras-chave',
+  tomada_decisao:'Tomada de Decisão',ancoras:'Âncoras de Carreira',
+  forcas:'Forças Pessoais',linguagem:'Linguagem de Valorização',devolutiva_escrita:'Devolutiva Escrita',
+};
+
+let abaAtiva='roteiro';
+
 function mostrarResultado(){
   document.getElementById('tela-app').style.display='none';
   document.getElementById('tela-resultado').style.display='block';
+
   const iniciais=nomeCliente.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
   document.getElementById('res-av').textContent=iniciais;
   document.getElementById('res-nome').textContent=nomeCliente;
-  document.getElementById('resultado-cards').innerHTML=textoFinal;
-  document.getElementById('resultado-narrativo').innerHTML='<h1>Devolutiva escrita — '+nomeCliente+'</h1>'+textoNarrativo;
+  document.getElementById('res-tipo').textContent='Devolutiva DISC EVO · Perfil '+dadosGerados._tipo;
+
+  const wrap=document.getElementById('resultado-wrap');
+  wrap.style.display='block';
+  wrap.innerHTML='';
+
+  // Montar abas
+  const nav=document.createElement('div');
+  nav.className='tabs-nav';
+
+  const content=document.createElement('div');
+
+  const todasAbas=[
+    {grupo:'GERAL',abas:ABAS_GERAL,classe:''},
+    ...(dadosGerados._tipo==='GERENCIAL'?[{grupo:'LIDERANÇA',abas:ABAS_LIDERANCA,classe:'grupo-lideranca'}]:[]),
+    {grupo:'INSTRUMENTOS',abas:ABAS_INSTRUMENTOS,classe:'grupo-instrumentos'},
+  ];
+
+  // Separadores de grupo
+  let primeiraAba=true;
+  todasAbas.forEach(({grupo,abas,classe})=>{
+    // Separador
+    const sep=document.createElement('span');
+    sep.style.cssText='display:flex;align-items:flex-end;padding:0 6px 8px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:#aaa;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px';
+    sep.textContent=grupo;
+    nav.appendChild(sep);
+
+    abas.forEach(aba=>{
+      if(!dadosGerados[aba.key]&&aba.key!=='roteiro')return; // pula abas sem conteúdo
+
+      const btn=document.createElement('button');
+      btn.className=`tab-btn ${classe} ${primeiraAba?'ativo':''}`;
+      btn.textContent=aba.label;
+      btn.dataset.key=aba.key;
+      btn.onclick=()=>trocarAba(aba.key);
+      nav.appendChild(btn);
+
+      const panel=document.createElement('div');
+      panel.className=`tab-panel ${primeiraAba?'ativo':''}`;
+      panel.id='panel-'+aba.key;
+
+      const conteudo=dadosGerados[aba.key]||'<p>Seção não disponível para este tipo de relatório ou dados insuficientes.</p>';
+      panel.innerHTML=`
+        <button class="btn-copiar" onclick="copiarAba('${aba.key}')">📋 Copiar conteúdo</button>
+        <h2>${TITULOS[aba.key]||aba.label}</h2>
+        ${conteudo}
+      `;
+      content.appendChild(panel);
+
+      if(primeiraAba){abaAtiva=aba.key;primeiraAba=false;}
+    });
+  });
+
+  wrap.appendChild(nav);
+  wrap.appendChild(content);
 }
 
-function setModo(modo,btn){
-  document.querySelectorAll('.modo-btn').forEach(b=>b.classList.remove('ativo'));
-  btn.classList.add('ativo');
-  document.getElementById('resultado-cards').style.display=modo==='cards'?'block':'none';
-  document.getElementById('resultado-narrativo').style.display=modo==='narrativo'?'block':'none';
+function trocarAba(key){
+  abaAtiva=key;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('ativo',b.dataset.key===key));
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('ativo',p.id==='panel-'+key));
+}
+
+function copiarAba(key){
+  const panel=document.getElementById('panel-'+key);
+  if(!panel)return;
+  const txt=panel.innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn=panel.querySelector('.btn-copiar');
+    if(btn){btn.textContent='✅ Copiado!';setTimeout(()=>btn.textContent='📋 Copiar conteúdo',2000);}
+  });
 }
 
 function novaDevolutiva(){
-  arquivos={perfil:null,ancora:null,forca:null,linguagem:null};
-  ['perfil','ancora','forca','linguagem'].forEach(t=>{
-    document.getElementById('slot-'+t).classList.remove('loaded');
-    document.getElementById('status-'+t).textContent='Clique para anexar';
-    document.getElementById('file-'+t).value='';
+  arquivos={perfil:null,ancora:null,forca:null,linguagem:null,mapa1:null,mapa2:null,mapa3:null};
+  ['perfil','ancora','forca','linguagem','mapa1','mapa2','mapa3'].forEach(t=>{
+    const slot=document.getElementById('slot-'+t);
+    const status=document.getElementById('status-'+t);
+    const file=document.getElementById('file-'+t);
+    if(slot)slot.classList.remove('loaded');
+    if(status)status.textContent='Clique para anexar';
+    if(file)file.value='';
   });
   document.getElementById('nome-cliente').value='';
   document.getElementById('btn-gerar').disabled=true;
+  document.getElementById('btn-gerar').textContent='✨ Gerar devolutiva completa';
   document.getElementById('tela-resultado').style.display='none';
   document.getElementById('tela-app').style.display='block';
 }
@@ -344,10 +566,8 @@ function salvarHTML(){
   const a=document.createElement('a');
   a.href=url;
   a.download='devolutiva_'+nomeCliente.toLowerCase().replace(/\s+/g,'_')+'.html';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(url);
 }
 </script>
 </body>
