@@ -179,6 +179,27 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
           <input type="file" id="file-linguagem" accept=".pdf" style="display:none" onchange="handleSlot('linguagem',this)">
         </div>
 
+        <span class="sec-label" style="margin-top:16px">📊 Gráficos dos Índices (opcionais)</span>
+        <div class="slot" id="slot-grafico-aem" onclick="document.getElementById('file-grafico-aem').click()">
+          <div class="slot-emoji">📊</div>
+          <div class="slot-info"><div class="slot-nome">Gráfico do AEM</div><div class="slot-hint">Autopercepção da Exigência do Meio — imagem</div></div>
+          <div class="slot-status" id="status-grafico-aem">Clique para anexar</div>
+          <input type="file" id="file-grafico-aem" accept="image/*" style="display:none" onchange="handleSlot('grafico-aem',this)">
+        </div>
+        <div class="slot" id="slot-grafico-ida" onclick="document.getElementById('file-grafico-ida').click()">
+          <div class="slot-emoji">📈</div>
+          <div class="slot-info"><div class="slot-nome">Gráfico do IDA</div><div class="slot-hint">Fase 1 × Fase 2 — imagem</div></div>
+          <div class="slot-status" id="status-grafico-ida">Clique para anexar</div>
+          <input type="file" id="file-grafico-ida" accept="image/*" style="display:none" onchange="handleSlot('grafico-ida',this)">
+        </div>
+
+        <div class="slot" id="slot-grafico-perfil" onclick="document.getElementById('file-grafico-perfil').click()">
+          <div class="slot-emoji">🥧</div>
+          <div class="slot-info"><div class="slot-nome">Gráfico de Composição dos Perfis</div><div class="slot-hint">Pizza D/I/S/C — imagem</div></div>
+          <div class="slot-status" id="status-grafico-perfil">Clique para anexar</div>
+          <input type="file" id="file-grafico-perfil" accept="image/*" style="display:none" onchange="handleSlot('grafico-perfil',this)">
+        </div>
+
         <span class="sec-label" style="margin-top:16px">🗺 Mapas de Autodesempenho (opcionais)</span>
         <div class="slot" id="slot-mapa1" onclick="document.getElementById('file-mapa1').click()">
           <div class="slot-emoji">🟢</div>
@@ -233,7 +254,7 @@ body{font-family:'Lato',sans-serif;background:var(--off-white);color:var(--graph
 
 <script>
 let apiKey='';
-let arquivos={perfil:null,ancora:null,forca:null,linguagem:null,mapa1:null,mapa2:null,mapa3:null};
+let arquivos={perfil:null,ancora:null,forca:null,linguagem:null,'grafico-aem':null,'grafico-ida':null,'grafico-perfil':null,mapa1:null,mapa2:null,mapa3:null};
 let nomeCliente='';
 let dadosGerados={};
 
@@ -343,6 +364,9 @@ async function gerarDevolutiva(){
       ['ancora','Âncoras de Carreira'],
       ['forca','Forças Pessoais'],
       ['linguagem','Linguagem de Valorização'],
+      ['grafico-aem','Gráfico do AEM'],
+      ['grafico-ida','Gráfico do IDA (Fase 1 × Fase 2)'],
+      ['grafico-perfil','Gráfico de Composição dos Perfis'],
       ['mapa1','Mapa Como Estou'],
       ['mapa2','Mapa Como Deveria Estar'],
       ['mapa3','Sobreposição dos Mapas']
@@ -544,7 +568,7 @@ function copiarAba(key){
 
 function novaDevolutiva(){
   arquivos={perfil:null,ancora:null,forca:null,linguagem:null,mapa1:null,mapa2:null,mapa3:null};
-  ['perfil','ancora','forca','linguagem','mapa1','mapa2','mapa3'].forEach(t=>{
+  ['perfil','ancora','forca','linguagem','grafico-aem','grafico-ida','grafico-perfil','mapa1','mapa2','mapa3'].forEach(t=>{
     const slot=document.getElementById('slot-'+t);
     const status=document.getElementById('status-'+t);
     const file=document.getElementById('file-'+t);
